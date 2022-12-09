@@ -29,11 +29,17 @@ app.use("/api/v1", productRoutes);
 app.use("/api/v1/user", userRoutes);
 app.use("/api/v1", orderRoutes);
 app.use("/api/v1", paymentRoute);
-
-app.use(express.static(path.join(__dirname, "../frontend/dist")));
-app.get("*", (req, res) => {
-	res.sendFile(path.resolve(__dirname, "../frontend/dist/index.html"));
+app.get("/", (req, res) => {
+	res.json({
+		success: true,
+		message:
+			"kindly use /api/v1/ nd then the endpoint you want to use just like /api/v1/products",
+	});
 });
+// app.use(express.static(path.join(__dirname, "../frontend/dist")));
+// app.get("*", (req, res) => {
+// 	res.sendFile(path.resolve(__dirname, "../frontend/dist/index.html"));
+// });
 //error HAndler Middleware
 app.use(errorMiddleware);
 module.exports = app;
